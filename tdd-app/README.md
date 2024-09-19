@@ -25,3 +25,13 @@ flowchart LR
 A --> B --> C
 
 ```
+
+### node-mocks-http
+
+- 단위 테스트에서 request, response 객체를 얻기 위해 `node-mocks-http` 모듈 이용
+- node-mocks-http 모듈을 이용해서 Express.js 애플리케이션 라우팅 함수를 테스트하기 위한 http 객체 (request, response)를 얻을 수 있다
+
+```js
+const req = httpMocks.createRequest();
+const res = httpMocks.createResponse();
+```

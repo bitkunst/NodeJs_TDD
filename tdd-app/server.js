@@ -17,6 +17,10 @@ app.use(express.json());
 
 app.use('/api/products', productsRoutes);
 
+app.get('/', (req, res) => {
+    res.send('Hello World!');
+});
+
 app.listen(PORT, () => {
     console.log(`App listening on port #${PORT}`);
 });
