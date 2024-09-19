@@ -160,3 +160,31 @@ it('plays video', () => {
 });
 
 ```
+
+### Test coverage
+
+- 테스트 커버리지(Test coverage)는 코드가 얼만큼 테스트되고 있는지를 나타내는 소프트웨어 품질 지표이다
+- 테스트 커버리지가 높은 소프트웨어는 버그가 발생할 확률이 적기 때문에 사용자가 좀 더 신뢰하고 사용할 수 있다
+
+```sh
+$ jest --coverage
+```
+
+- 테스트 커버리지를 사용하려면 jest 명령어에 `--coverage` 옵션만 붙여주면 된다
+- 터미널에 Coverage 요약본이 나타난다
+  - 이 Coverage 요약본에는 구문(Statements), 분기(Branches), 함수(Functions), 줄(Lines) 기준으로 코드가 얼마나 테스트되고 있는지가 퍼센트로 표시된다
+
+**최소 커버리지 기준 설정**
+
+```json
+{
+    "coverageThreshold": {
+        "./src/": {
+            "statements": 95,
+            "branches": 90,
+            "functions": 95,
+            "lines": 90
+        }
+    }
+}
+```
