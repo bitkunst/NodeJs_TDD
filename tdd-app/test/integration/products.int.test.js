@@ -2,6 +2,8 @@ const request = require('supertest');
 const app = require('../../server');
 const newProduct = require('../data/new-product.json');
 
+let firstProduct;
+
 describe('Server Test', () => {
     it('POST /api/products', async () => {
         const response = await request(app).post('/api/products').send(newProduct);
@@ -22,10 +24,25 @@ describe('Server Test', () => {
 
     it('GET /api/products', async () => {
         const response = await request(app).get('/api/products');
+        firstProduct = response.body[0];
 
         expect(response.statusCode).toBe(200);
         expect(Array.isArray(response.body)).toBeTruthy();
         expect(response.body[0].name).toBeDefined();
         expect(response.body[0].description).toBeDefined();
+    });
+
+    it('GET /api/products/:productId', async () => {
+        const response = await request(app).get(`/api/products/${firstProduct._id}`);
+
+        expect(response.statusCode).toBe(200);
+        expect(response.body.name).toBeDefined();
+        expect(response.body.description).toBeDefined();
+    });
+
+    it('GET id does not exist /api/products/:productId', async () => {
+        const response = await request(app).get('/api/products/60ec2c049f1c59f76a14770b');
+
+        expect(response.statusCode).toBe(404);
     });
 });
