@@ -4,7 +4,7 @@
   "description": "Node.js TDD App",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest --verbose --forceExit",
     "start": "node server.js",
     "start:dev": "nodemon server.js"
   },
