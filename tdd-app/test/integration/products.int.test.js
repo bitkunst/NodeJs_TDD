@@ -45,4 +45,22 @@ describe('Server Test', () => {
 
         expect(response.statusCode).toBe(404);
     });
+
+    it('PUT /api/products/:productId', async () => {
+        const response = await request(app)
+            .put(`/api/products/${firstProduct._id}`)
+            .send({ name: 'updated name', description: 'updated description' });
+
+        expect(response.statusCode).toBe(200);
+        expect(response.body.name).toBe('updated name');
+        expect(response.body.description).toBe('updated description');
+    });
+
+    it('should return 404 on PUT /api/products/:productId', async () => {
+        const response = await request(app)
+            .put('/api/products/60ec2c049f1c59f76a14770b')
+            .send({ name: 'updated name', description: 'updated description' });
+
+        expect(response.statusCode).toBe(404);
+    });
 });
