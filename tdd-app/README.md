@@ -35,3 +35,34 @@ A --> B --> C
 const req = httpMocks.createRequest();
 const res = httpMocks.createResponse();
 ```
+
+### supertest
+
+- Node.js http 서버를 테스트하기 위해 만들어진 모듈
+- supertest 모듈을 이용해서 통합 테스트를 쉽게 구현할 수 있다
+
+**Integration 테스트**
+
+- 통합 테스트는 모듈을 통합하는 단계에서 수행하는 테스트이다
+- 단위 테스트를 먼저 수행하여 모듈들이 잘 작동되는 것을 확인했다면, 이제 이 모듈들을 연동하여 테스트를 수행하는 것
+
+```js
+const request = require('supertest');
+const express = require('express');
+const app = express();
+
+// 원본 소스코드
+app.get('/user', (req, res) => {
+    res.status(200).json({ name: 'bitkunst' })
+});
+
+// 위의 원본 소스코드를 위한 통합 테스트 코드
+request(app)
+    .get('/user')
+    .expect('Content-Type', '/json/')
+    .expect('Content-Length', '15')
+    .expect(200)
+    .end((err, res) => {
+        if (err) throw err;
+    });
+```
