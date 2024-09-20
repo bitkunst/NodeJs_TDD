@@ -63,4 +63,16 @@ describe('Server Test', () => {
 
         expect(response.statusCode).toBe(404);
     });
+
+    it('DELETE /api/products/:productId', async () => {
+        const response = await request(app).delete(`/api/products/${firstProduct._id}`);
+
+        expect(response.statusCode).toBe(200);
+    });
+
+    it('DELETE id does not exist /api/products/:productId', async () => {
+        const response = await request(app).delete('/api/products/60ec2c049f1c59f76a14770b');
+
+        expect(response.statusCode).toBe(404);
+    });
 });
